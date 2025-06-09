@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_audiorec import st_audiorec
+from audiorecorder import audiorecorder
 from groq_layer import analyze_sentiment, extract_rating
 import whisper
 import tempfile
@@ -24,17 +24,19 @@ with st.sidebar:
 st.title("📊 Text & Voice Sentiment Analyzer")
 
 def render_sentiment_ui(summary: str, rating: int):
+    # Map rating to metric delta and color
     if rating >= 4:
         delta = "Positive"
-        delta_color = "normal"
+        delta_color = "normal"  # green
     elif rating == 3:
         delta = "Neutral"
-        delta_color = "off"
+        delta_color = "off"     # gray
     else:
         delta = "Negative"
-        delta_color = "inverse"
+        delta_color = "inverse" # red
 
     st.markdown("### 💬 Sentiment Analysis Result")
+
     col1, col2 = st.columns([1, 4])
     with col1:
         st.metric(label="Rating", value=f"{rating}/5", delta=delta, delta_color=delta_color)
@@ -44,14 +46,14 @@ def render_sentiment_ui(summary: str, rating: int):
 # === VOICE RECORDING SECTION ===
 st.header("🎙️ Record Live Audio")
 
-audio_bytes = st_audiorec()
-
-if audio_bytes:
+audio = audiorecorder("🎙️ Start Recording", "🛑 Stop Recording")
+if len(audio) > 0:
     st.success("✅ Recording captured!")
+    audio_bytes = audio.export().read()
     st.audio(audio_bytes, format="audio/wav")
 
     with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as f:
-        f.write(audio_bytes)
+        audio.export(f.name, format="wav")
         audio_path = f.name
 
     st.info("Transcribing with Whisper...")
