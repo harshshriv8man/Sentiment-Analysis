@@ -1,7 +1,5 @@
-streamlit>=1.20.0
-audiorecorder>=0.0.9
-openai
-whisper
-pandas
+streamlit
+audiorecorder
+openai-whisper
 groq
-streamlit-audiorecorder
+pandas
