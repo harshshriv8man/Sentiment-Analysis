@@ -1,7 +1,10 @@
 from groq import Groq
+import streamlit as st
 import re
 
-client = Groq(api_key="")
+
+api_key = st.secrets["GROQ_API_KEY"]
+client = Groq(api_key=api_key)
 
 SENTIMENT_SYSTEM = """
 You are a highly skilled sentiment analysis assistant. You will analyze transcribed voice or written text from users. 
