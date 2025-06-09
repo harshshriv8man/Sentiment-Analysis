@@ -1,5 +1,6 @@
 streamlit
-streamlit-audiorec
+audiorecorder
 openai-whisper
-groq
 pandas
+python-dotenv
+groq
