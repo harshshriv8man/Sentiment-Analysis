@@ -1,5 +1,5 @@
 streamlit
-audiorecorder
+streamlit-audiorec
 openai-whisper
 groq
 pandas
