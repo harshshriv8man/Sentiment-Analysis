@@ -1,8 +1,11 @@
 streamlit==1.45.1
 audiorecorder==0.1
-openai-whisper==20240930
+openai-whisper==20240930  # Or use the GitHub URL if you face issues with the version.
 groq==0.0.3
 requests>=2.27,<3
 pydub==0.25.1
 pandas==1.5.3
 time==0.0.1
+setuptools>=59.5.0
+pip --upgrade
+wheel
